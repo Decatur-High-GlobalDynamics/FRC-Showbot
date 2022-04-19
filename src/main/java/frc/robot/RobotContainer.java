@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -24,11 +26,15 @@ public class RobotContainer {
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
+  public static ShooterSubsystem shooter;
+
   public static Joystick primaryJoystick, secondaryJoystick;
   public static JoystickButton primaryTrigger, secondaryTrigger;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    shooter = ShooterSubsystem.Create();
+
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -42,6 +48,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     primaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
     secondaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
+
+    primaryTrigger.whenHeld(new ShootCommand(secondaryTrigger, shooter));
   }
 
   /**
