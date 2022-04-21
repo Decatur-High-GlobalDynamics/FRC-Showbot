@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.TankDriveCommand;
+import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,6 +29,8 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   public static ShooterSubsystem shooter;
+
+  public static DrivetrainSubsystem driveTrain;
 
   public static Joystick primaryJoystick, secondaryJoystick;
   public static JoystickButton primaryTrigger, secondaryTrigger;
@@ -50,6 +54,9 @@ public class RobotContainer {
     secondaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
 
     primaryTrigger.whenHeld(new ShootCommand(secondaryTrigger, shooter));
+
+    driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, primaryJoystick.getY(), primaryJoystick.getThrottle()));
+
   }
 
   /**
