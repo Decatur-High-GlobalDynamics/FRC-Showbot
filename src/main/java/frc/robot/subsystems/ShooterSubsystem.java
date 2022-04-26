@@ -24,5 +24,9 @@ public class ShooterSubsystem extends SubsystemBase {
     public static ShooterSubsystem Create() {
         return new ShooterSubsystem();
     }
+
+    public void set(float power, String reason) {
+        leftMotor.set(power, reason);
+    }
     
 }
