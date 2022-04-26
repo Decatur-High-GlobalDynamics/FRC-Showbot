@@ -16,7 +16,7 @@ public class ShootCommand extends CommandBase {
     }
 
     public void execute() {
-        if(secondaryTrigger.get()) shooter.leftMotor.set(1, "Right trigger on secondary joystick said so");
+        if(secondaryTrigger.get()) shooter.set(1, "Right trigger on secondary joystick said so");
     }
 
 }
