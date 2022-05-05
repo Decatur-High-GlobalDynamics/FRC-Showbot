@@ -131,7 +131,7 @@ public class TeamSparkMAX extends CANSparkMax {
     setClosedLoopTarget(speed);
     ctrlType = CANSparkMax.ControlType.kSmartVelocity;
     REVLibError errors = this.canPidController.setReference(Math.abs(speed), CANSparkMax.ControlType.kSmartVelocity);
-    Logs.severe("Set smart motion velocity to: " + speed + " on motor: " + smartDashboardPrefix + " for reason: " + reason);
+    //Logs.severe("Set smart motion velocity to: " + speed + " on motor: " + smartDashboardPrefix + " for reason: " + reason);
     return errors;
   }
 
@@ -161,6 +161,6 @@ public class TeamSparkMAX extends CANSparkMax {
 
   public void set(double power, String reason) {
     super.set(power);
-    Logs.info("Set power to: " + power + " on motor: " + smartDashboardPrefix + " for reason: " + reason);
+    //Logs.info("Set power to: " + power + " on motor: " + smartDashboardPrefix + " for reason: " + reason);
   }
 }

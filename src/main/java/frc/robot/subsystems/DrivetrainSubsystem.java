@@ -28,23 +28,14 @@ public class DrivetrainSubsystem extends SubsystemBase
   static final double maxPowerChange = 0.1;
 
   public DrivetrainSubsystem() {
-    throw new IllegalArgumentException(
-        "not allowed! ctor must provide parameters for all dependencies");
-  }
-
-  public DrivetrainSubsystem(
-      ITeamTalon rightDriveFalconMain,
-      ITeamTalon leftDriveFalconMain,
-      ITeamTalon rightDriveFalconSub,
-      ITeamTalon leftDriveFalconSub) {
-    this.rightDriveFalconMain =
-        Objects.requireNonNull(rightDriveFalconMain, "rightDriveFalconMain must not be null");
-    this.leftDriveFalconMain =
-        Objects.requireNonNull(leftDriveFalconMain, "leftDriveFalconMain must not be null");
-    this.rightDriveFalconSub =
-        Objects.requireNonNull(rightDriveFalconSub, "rightDriveFalconSub must not be null");
-    this.leftDriveFalconSub =
-        Objects.requireNonNull(leftDriveFalconSub, "leftDriveFalconSub must not be null");
+    rightDriveFalconMain =
+        new TeamTalonFX("Subsystems.DriveTrain.RightMain", Ports.RightDriveFalconMainCAN);
+    leftDriveFalconMain =
+        new TeamTalonFX("Subsystems.DriveTrain.LeftMain", Ports.LeftDriveFalconMainCAN);
+    rightDriveFalconSub =
+        new TeamTalonFX("Subsystems.DriveTrain.RightSub", Ports.RightDriveFalconSubCAN);
+    leftDriveFalconSub =
+        new TeamTalonFX("Subsystems.DriveTrain.LeftSub", Ports.LeftDriveFalconSubCAN);
     setupDrivetrain();
   }
 
@@ -67,22 +58,6 @@ public class DrivetrainSubsystem extends SubsystemBase
     rightDriveFalconMain.setNeutralMode(NeutralMode.Brake);
   }
 
-  public static DrivetrainSubsystem Create() {
-    ITeamTalon rightDriveFalconMainCAN =
-        new TeamTalonFX("Subsystems.DriveTrain.RightMain", Ports.RightDriveFalconMainCAN);
-    ITeamTalon leftDriveFalconMainCAN =
-        new TeamTalonFX("Subsystems.DriveTrain.LeftMain", Ports.LeftDriveFalconMainCAN);
-    ITeamTalon rightDriveFalconSubCAN =
-        new TeamTalonFX("Subsystems.DriveTrain.RightSub", Ports.RightDriveFalconSubCAN);
-    ITeamTalon leftDriveFalconSub =
-        new TeamTalonFX("Subsystems.DriveTrain.LeftSub", Ports.LeftDriveFalconSubCAN);
-    return new DrivetrainSubsystem(
-        rightDriveFalconMainCAN,
-        leftDriveFalconMainCAN,
-        rightDriveFalconSubCAN,
-        leftDriveFalconSub);
-  }
-
   private double getCappedPower(double desired) {
     return Math.max(Math.min(1, desired), -1);
   }
@@ -98,7 +73,7 @@ public class DrivetrainSubsystem extends SubsystemBase
       double newPowerRight;
       double newPowerLeft;
 
-      if (rightPowerDesired > currentRightPower)
+      if (rightPowerDesired < currentRightPower)
       {
         newPowerRight = Math.max(rightPowerDesired, currentRightPower - maxPowerChange);
       } 
@@ -111,7 +86,7 @@ public class DrivetrainSubsystem extends SubsystemBase
         newPowerRight = rightPowerDesired;
       }
 
-      if (leftPowerDesired > currentLeftPower)
+      if (leftPowerDesired < currentLeftPower)
       {
         newPowerLeft = Math.max(leftPowerDesired, currentLeftPower - maxPowerChange);
       } 

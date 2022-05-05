@@ -36,7 +36,7 @@ public class TeamTalonFX extends WPI_TalonFX implements ITeamTalon {
 
   public void set(double power, String reason) {
     super.set(power);
-    Logs.info("Set power to " + power + " REASON: " + reason);
+    //Logs.info("Set power to " + power + " REASON: " + reason);
   }
 
   public void resetEncoder() {

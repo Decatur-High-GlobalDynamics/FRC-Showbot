@@ -9,7 +9,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.NetworkTableValue;
 
-import frc.robot.constants.Scalar;
+import frc.robot.Scalar;
 
 public class TeamUtils {
   public static double getCurrentTime() {

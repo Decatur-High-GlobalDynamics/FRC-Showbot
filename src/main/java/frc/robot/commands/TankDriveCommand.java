@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -11,12 +13,12 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 /** An example command that uses an example subsystem. */
 public class TankDriveCommand extends CommandBase {
   DrivetrainSubsystem driveTrain;
-  Double rightStick;
-  Double leftStick;
+  DoubleSupplier rightStick;
+  DoubleSupplier leftStick;
 
   final double deadZoneAmount = 0.05;
 
-  public TankDriveCommand(DrivetrainSubsystem driveTrain, Double leftStick, Double rightStick) {
+  public TankDriveCommand(DrivetrainSubsystem driveTrain, DoubleSupplier leftStick, DoubleSupplier rightStick) {
     this.driveTrain = driveTrain;
     this.rightStick = rightStick;
     this.leftStick = leftStick;
@@ -25,7 +27,7 @@ public class TankDriveCommand extends CommandBase {
 
   public void execute()
   {
-    driveTrain.setMotorPowers(deadZone(leftStick), deadZone(rightStick), "Joysticks said to");
+    driveTrain.setMotorPowers(deadZone(leftStick.getAsDouble()), deadZone(rightStick.getAsDouble()), "Joysticks said to");
   }
 
   double deadZone (double input) 

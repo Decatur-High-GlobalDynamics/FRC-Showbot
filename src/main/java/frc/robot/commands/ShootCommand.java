@@ -1,8 +1,12 @@
 package frc.robot.commands;
 
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Robot;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShootCommand extends CommandBase {
@@ -16,7 +20,8 @@ public class ShootCommand extends CommandBase {
     }
 
     public void execute() {
-        if(secondaryTrigger.get()) shooter.set(1, "Right trigger on secondary joystick said so");
+        if(Robot.isTestMode || secondaryTrigger.get()) shooter.set(1, "Right trigger on secondary joystick said so");
+        SmartDashboard.putBoolean("Secondary Trigger", secondaryTrigger.get());
     }
 
 }

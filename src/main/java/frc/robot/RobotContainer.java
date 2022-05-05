@@ -37,7 +37,8 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    shooter = ShooterSubsystem.Create();
+    shooter = new ShooterSubsystem();
+    driveTrain = new DrivetrainSubsystem();
 
     // Configure the button bindings
     configureButtonBindings();
@@ -50,12 +51,15 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    primaryJoystick = new Joystick(0);
+    secondaryJoystick = new Joystick(1);
+
     primaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
-    secondaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
+    secondaryTrigger = new JoystickButton(secondaryJoystick, LogitechControllerButtons.triggerRight);
 
     primaryTrigger.whenHeld(new ShootCommand(secondaryTrigger, shooter));
 
-    driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, primaryJoystick.getY(), primaryJoystick.getThrottle()));
+    driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, () -> primaryJoystick.getY(), () -> primaryJoystick.getThrottle()));
 
   }
 

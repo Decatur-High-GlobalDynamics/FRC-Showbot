@@ -1,4 +1,4 @@
-package frc.robot.constants;
+package frc.robot;
 
 public class Scalar {
     public static double EPSILON = 1e-12;

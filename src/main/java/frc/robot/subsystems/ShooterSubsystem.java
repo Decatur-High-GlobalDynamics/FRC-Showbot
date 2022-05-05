@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.PidParameters;
 import frc.robot.Ports;
+import frc.robot.Robot;
 import frc.robot.TeamSparkMAX;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -42,9 +43,10 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void set(float power, String reason) {
-        leftMotor.setSmartMotionVelocity(powerToRPM(power), reason);
-        leftMotor.configureWithPidParameters(pidParameters, 0);
-        rightMotor.configureWithPidParameters(pidParameters, 0);
+        //leftMotor.setSmartMotionVelocity(powerToRPM(power), reason);
+        leftMotor.set(power, reason);
+        //leftMotor.configureWithPidParameters(pidParameters, 0);
+        //rightMotor.configureWithPidParameters(pidParameters, 0);
     }
 
     public double powerToRPM(double power) {
