@@ -84,6 +84,8 @@ public class TeamSparkMAX extends CANSparkMax {
     double currentEncoderValue = getCurrentEncoderValue();
     double currentSpeed = canEncoder.getVelocity();
 
+    SmartDashboard.putNumber(smartDashboardPrefix + ".power", super.get());
+
     if (maxSpeed == Double.MAX_VALUE || currentSpeed > maxSpeed) maxSpeed = currentSpeed;
 
     // SmartDashboard.putNumber(smartDashboardPrefix + ".PowerPercent", getMotorOutputPercent());

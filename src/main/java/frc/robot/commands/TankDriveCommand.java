@@ -17,6 +17,7 @@ public class TankDriveCommand extends CommandBase {
   DoubleSupplier leftStick;
 
   final double deadZoneAmount = 0.05;
+  final double SPEED_DIVISOR = 4;
 
   public TankDriveCommand(DrivetrainSubsystem driveTrain, DoubleSupplier leftStick, DoubleSupplier rightStick) {
     this.driveTrain = driveTrain;
@@ -27,7 +28,7 @@ public class TankDriveCommand extends CommandBase {
 
   public void execute()
   {
-    driveTrain.setMotorPowers(deadZone(leftStick.getAsDouble()), deadZone(rightStick.getAsDouble()), "Joysticks said to");
+    driveTrain.setMotorPowers(deadZone(leftStick.getAsDouble())/SPEED_DIVISOR, deadZone(rightStick.getAsDouble())/SPEED_DIVISOR, "Joysticks said to");
   }
 
   double deadZone (double input) 

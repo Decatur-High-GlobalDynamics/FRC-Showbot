@@ -57,7 +57,7 @@ public class RobotContainer {
     primaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
     secondaryTrigger = new JoystickButton(secondaryJoystick, LogitechControllerButtons.triggerRight);
 
-    primaryTrigger.whenHeld(new ShootCommand(secondaryTrigger, shooter));
+    primaryTrigger.whileHeld(new ShootCommand(secondaryTrigger, shooter));
 
     driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, () -> primaryJoystick.getY(), () -> primaryJoystick.getThrottle()));
 
