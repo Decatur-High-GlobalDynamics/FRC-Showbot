@@ -7,4 +7,5 @@ public class Ports {
     public static int LeftDriveFalconMainCAN = 4;
     public static int RightDriveFalconSubCAN = 5;
     public static int LeftDriveFalconSubCAN = 6;
+    public static int AGITATOR = 7;
 }

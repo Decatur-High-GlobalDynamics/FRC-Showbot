@@ -4,9 +4,12 @@
 
 package frc.robot;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.AgitateCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TankDriveCommand;
@@ -14,6 +17,7 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -34,6 +38,7 @@ public class RobotContainer {
 
   public static Joystick primaryJoystick, secondaryJoystick;
   public static JoystickButton primaryTrigger, secondaryTrigger;
+  public static JoystickButton aButton;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -56,11 +61,12 @@ public class RobotContainer {
 
     primaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
     secondaryTrigger = new JoystickButton(secondaryJoystick, LogitechControllerButtons.triggerRight);
+    aButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.a);
 
     primaryTrigger.whileHeld(new ShootCommand(secondaryTrigger, shooter));
 
     driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, () -> primaryJoystick.getY(), () -> primaryJoystick.getThrottle()));
-
+    aButton.whileHeld(new AgitateCommand(new TeamTalonFX("agitator", Ports.AGITATOR)));
   }
 
   /**
