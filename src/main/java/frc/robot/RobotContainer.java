@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AgitateCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ReverseAgitateCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -36,9 +37,12 @@ public class RobotContainer {
 
   public static DrivetrainSubsystem driveTrain;
 
+  public static TeamTalonFX agitator;
+
   public static Joystick primaryJoystick, secondaryJoystick;
   public static JoystickButton primaryTrigger, secondaryTrigger;
   public static JoystickButton aButton;
+  public static JoystickButton bButton;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -62,11 +66,15 @@ public class RobotContainer {
     primaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
     secondaryTrigger = new JoystickButton(secondaryJoystick, LogitechControllerButtons.triggerRight);
     aButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.a);
+    bButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.b);
 
     primaryTrigger.whileHeld(new ShootCommand(secondaryTrigger, shooter));
 
     driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, () -> primaryJoystick.getY(), () -> primaryJoystick.getThrottle()));
-    aButton.whenHeld(new AgitateCommand(new TeamTalonFX("agitator", Ports.AGITATOR)));
+
+    agitator = new TeamTalonFX("agitator", Ports.AGITATOR);
+    aButton.whenHeld(new AgitateCommand(agitator));
+    bButton.whenHeld(new ReverseAgitateCommand(agitator));
   }
 
   /**
