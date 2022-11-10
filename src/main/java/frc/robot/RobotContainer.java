@@ -66,7 +66,7 @@ public class RobotContainer {
     primaryTrigger.whileHeld(new ShootCommand(secondaryTrigger, shooter));
 
     driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, () -> primaryJoystick.getY(), () -> primaryJoystick.getThrottle()));
-    aButton.whileHeld(new AgitateCommand(new TeamTalonFX("agitator", Ports.AGITATOR)));
+    aButton.whenHeld(new AgitateCommand(new TeamTalonFX("agitator", Ports.AGITATOR)));
   }
 
   /**
