@@ -25,7 +25,7 @@ public class DrivetrainSubsystem extends SubsystemBase
   ITeamTalon rightDriveFalconSub;
   ITeamTalon leftDriveFalconSub;
 
-  static final double maxPowerChange = 0.1;
+  static final double maxPowerChange = 0.01;
 
   public DrivetrainSubsystem() {
     rightDriveFalconMain =
@@ -73,11 +73,11 @@ public class DrivetrainSubsystem extends SubsystemBase
       double newPowerRight;
       double newPowerLeft;
 
-      if (rightPowerDesired < currentRightPower)
+      if ((rightPowerDesired < currentRightPower) && (currentRightPower < 0))
       {
         newPowerRight = Math.max(rightPowerDesired, currentRightPower - maxPowerChange);
       } 
-      else if (rightPowerDesired > currentRightPower) 
+      else if ((rightPowerDesired > currentRightPower) && (currentRightPower > 0))
       {
         newPowerRight = Math.min(rightPowerDesired, currentRightPower + maxPowerChange);
       } 
@@ -86,11 +86,11 @@ public class DrivetrainSubsystem extends SubsystemBase
         newPowerRight = rightPowerDesired;
       }
 
-      if (leftPowerDesired < currentLeftPower)
+      if ((leftPowerDesired < currentLeftPower) && (currentRightPower < 0))
       {
         newPowerLeft = Math.max(leftPowerDesired, currentLeftPower - maxPowerChange);
       } 
-      else if (leftPowerDesired > currentLeftPower) 
+      else if ((leftPowerDesired > currentLeftPower) && (currentRightPower > 0))
       {
         newPowerLeft = Math.min(leftPowerDesired, currentLeftPower + maxPowerChange);
       } 
