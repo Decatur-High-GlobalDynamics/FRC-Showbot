@@ -13,7 +13,6 @@ import frc.robot.commands.AgitateCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ReverseAgitateCommand;
 import frc.robot.commands.ShootCommand;
-import frc.robot.commands.SpeedMode;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -44,7 +43,6 @@ public class RobotContainer {
   public static JoystickButton primaryTrigger, secondaryTrigger;
   public static JoystickButton aButton;
   public static JoystickButton bButton;
-  public static JoystickButton primaryBumper;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -66,7 +64,6 @@ public class RobotContainer {
     secondaryJoystick = new Joystick(1);
 
     primaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
-    primaryBumper = new JoystickButton(primaryJoystick, LogitechControllerButtons.bumperRight);
     secondaryTrigger = new JoystickButton(secondaryJoystick, LogitechControllerButtons.triggerRight);
     aButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.a);
     bButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.b);
@@ -78,8 +75,6 @@ public class RobotContainer {
     agitator = new TeamTalonFX("agitator", Ports.AGITATOR);
     aButton.whenHeld(new AgitateCommand(agitator));
     bButton.whenHeld(new ReverseAgitateCommand(agitator));
-
-    primaryBumper.whileHeld(new SpeedMode(driveTrain));
   }
 
   /**
