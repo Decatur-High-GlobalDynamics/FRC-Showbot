@@ -24,6 +24,7 @@ public class DrivetrainSubsystem extends SubsystemBase
   ITeamTalon leftDriveFalconMain;
   ITeamTalon rightDriveFalconSub;
   ITeamTalon leftDriveFalconSub;
+  private Double speedMod;
 
   static final double maxPowerChange = 0.01;
 
@@ -62,12 +63,16 @@ public class DrivetrainSubsystem extends SubsystemBase
     return Math.max(Math.min(1, desired), -1);
   }
 
+  public void setSpeedMod(Double speedMod) {
+    this.speedMod = speedMod;
+  }
+
   public void setMotorPowers(double leftPowerDesired, double rightPowerDesired, String reason) 
   {
     if (Robot.isTestMode)
     {
-      leftPowerDesired = getCappedPower(leftPowerDesired);
-      rightPowerDesired = getCappedPower(rightPowerDesired);
+      leftPowerDesired = getCappedPower(leftPowerDesired * speedMod);
+      rightPowerDesired = getCappedPower(rightPowerDesired * speedMod);
       double currentRightPower = rightDriveFalconMain.get();
       double currentLeftPower = leftDriveFalconMain.get();
       double newPowerRight;
