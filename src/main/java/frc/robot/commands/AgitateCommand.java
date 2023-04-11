@@ -22,7 +22,7 @@ public class AgitateCommand extends CommandBase {
     }
 
     public void execute() {
-        agitator.set(.4, "A button down.");
+        agitator.set(.75, "A button down.");
         SmartDashboard.putBoolean("A Button", true);
     }
 
