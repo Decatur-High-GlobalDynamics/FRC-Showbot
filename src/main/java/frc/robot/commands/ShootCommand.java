@@ -20,9 +20,9 @@ public class ShootCommand extends CommandBase {
     }
 
     public void execute() {
-        if(Robot.isTestMode || secondaryTrigger.get()) shooter.set(1, "Right trigger on secondary joystick said so");
+        if(Robot.isTestMode || secondaryTrigger.getAsBoolean()) shooter.set(1, "Right trigger on secondary joystick said so");
         else shooter.set(0, "not meant to shoot");
-        SmartDashboard.putBoolean("Secondary Trigger", secondaryTrigger.get());
+        SmartDashboard.putBoolean("Secondary Trigger", secondaryTrigger.getAsBoolean());
     }
 
     public void end(boolean interrupted) {
