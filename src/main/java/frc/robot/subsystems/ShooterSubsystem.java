@@ -30,9 +30,8 @@ public class ShooterSubsystem extends SubsystemBase {
         leftMotor = new TeamSparkMAX("Left Shooter Motor", Ports.SHOOTER_MOTOR_LEFT);
         rightMotor = new TeamSparkMAX("Right Shooter Motor", Ports.SHOOTER_MOTOR_RIGHT);
 
-        leftMotor.setInverted(true);
-
         rightMotor.follow(leftMotor, true);
+        leftMotor.setInverted(false); //Right is disconnected
 
         leftMotor.enableVoltageCompensation(voltage);
         rightMotor.enableVoltageCompensation(voltage);
