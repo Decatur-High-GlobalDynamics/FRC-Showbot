@@ -9,6 +9,8 @@ import java.util.function.BooleanSupplier;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.commands.AgitateCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ReverseAgitateCommand;
@@ -28,6 +30,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
+  public static ShuffleboardTab tab = Shuffleboard.getTab("Main");
+
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -51,6 +56,9 @@ public class RobotContainer {
 
     // Configure the button bindings
     configureButtonBindings();
+
+    tab.addBoolean("Primary Trigger", ()->primaryTrigger.getAsBoolean());
+    tab.addBoolean("Secondary Button", ()->triggerButton.getAsBoolean());
   }
 
   /**
