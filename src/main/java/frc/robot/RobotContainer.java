@@ -40,7 +40,7 @@ public class RobotContainer {
   public static TeamTalonFX agitator;
 
   public static Joystick primaryJoystick, secondaryJoystick;
-  public static JoystickButton primaryTrigger, secondaryTrigger;
+  public static JoystickButton primaryTrigger, triggerButton;
   public static JoystickButton aButton;
   public static JoystickButton bButton;
 
@@ -64,17 +64,17 @@ public class RobotContainer {
     secondaryJoystick = new Joystick(1);
 
     primaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
-    secondaryTrigger = new JoystickButton(secondaryJoystick, LogitechControllerButtons.triggerRight);
+    triggerButton = new JoystickButton(secondaryJoystick, LogitechControllerButtons.triggerRight);
     aButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.a);
     bButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.b);
 
-    primaryTrigger.whileHeld(new ShootCommand(secondaryTrigger, shooter));
+    primaryTrigger.whileTrue(new ShootCommand(triggerButton, shooter));
 
     driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, () -> primaryJoystick.getY(), () -> primaryJoystick.getThrottle()));
 
     agitator = new TeamTalonFX("agitator", Ports.AGITATOR);
-    aButton.whenHeld(new AgitateCommand(agitator));
-    bButton.whenHeld(new ReverseAgitateCommand(agitator));
+    aButton.whileTrue(new AgitateCommand(agitator));
+    bButton.whileTrue(new ReverseAgitateCommand(agitator));
   }
 
   /**
