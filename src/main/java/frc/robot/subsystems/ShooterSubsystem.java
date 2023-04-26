@@ -13,6 +13,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
     private static double voltage = 12;
 
+    public double speedMod = 0.5;
+
     private PidParameters pidParameters;
     private static double kP = .0005,
         kI = 0,
@@ -45,7 +47,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void set(float power, String reason) {
         //leftMotor.setSmartMotionVelocity(powerToRPM(power), reason);
-        leftMotor.set(power, reason);
+        leftMotor.set(power * speedMod, reason);
         //leftMotor.configureWithPidParameters(pidParameters, 0);
         //rightMotor.configureWithPidParameters(pidParameters, 0);
     }

@@ -15,6 +15,7 @@ import frc.robot.commands.AgitateCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ReverseAgitateCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.commands.ShootModeCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -45,7 +46,7 @@ public class RobotContainer {
   public static TeamTalonFX agitator;
 
   public static Joystick primaryJoystick, secondaryJoystick;
-  public static JoystickButton primaryTrigger, triggerButton;
+  public static JoystickButton primaryTrigger, triggerButton, primaryTriggerTwo;
   public static JoystickButton aButton;
   public static JoystickButton bButton;
 
@@ -59,6 +60,7 @@ public class RobotContainer {
 
     tab.addBoolean("Primary Trigger", ()->primaryTrigger.getAsBoolean());
     tab.addBoolean("Secondary Button", ()->triggerButton.getAsBoolean());
+    tab.addDouble("Shooter Speed Modifier", ()->(shooter.speedMod));
   }
 
   /**
@@ -72,11 +74,15 @@ public class RobotContainer {
     secondaryJoystick = new Joystick(1);
 
     primaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
+    primaryTriggerTwo = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerLeft);
     triggerButton = new JoystickButton(secondaryJoystick, LogitechControllerButtons.triggerRight);
     aButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.a);
     bButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.b);
 
     primaryTrigger.whileTrue(new ShootCommand(triggerButton, shooter));
+
+    primaryTriggerTwo.onTrue(new ShootModeCommand(1, shooter))
+      .onFalse(new ShootModeCommand(0.5, shooter));
 
     driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, () -> primaryJoystick.getY(), () -> primaryJoystick.getThrottle()));
 
