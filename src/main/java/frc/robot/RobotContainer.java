@@ -58,9 +58,12 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
+    tab.addBoolean("Safe Mode", ()->!Robot.isTestMode);
     tab.addBoolean("Primary Trigger", ()->primaryTrigger.getAsBoolean());
     tab.addBoolean("Secondary Button", ()->triggerButton.getAsBoolean());
     tab.addDouble("Shooter Speed Modifier", ()->(shooter.speedMod));
+    tab.addBoolean("Shooting", () -> primaryTrigger.getAsBoolean() && (Robot.isTestMode || triggerButton.getAsBoolean()));
+    tab.addDouble("Agitating", () -> aButton.getAsBoolean() ? 1 : bButton.getAsBoolean() ? -1 : 0 );
   }
 
   /**
@@ -75,7 +78,7 @@ public class RobotContainer {
 
     primaryTrigger = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
     primaryTriggerTwo = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerLeft);
-    triggerButton = new JoystickButton(secondaryJoystick, LogitechControllerButtons.triggerRight);
+    triggerButton = new JoystickButton(secondaryJoystick, LogitechControllerButtons.x);
     aButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.a);
     bButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.b);
 
