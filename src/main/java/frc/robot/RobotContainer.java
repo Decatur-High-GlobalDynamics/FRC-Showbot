@@ -90,8 +90,8 @@ public class RobotContainer {
     driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, () -> primaryJoystick.getY(), () -> primaryJoystick.getThrottle()));
 
     agitator = new TeamTalonFX("agitator", Ports.AGITATOR);
-    aButton.whileTrue(new AgitateCommand(agitator));
-    bButton.whileTrue(new ReverseAgitateCommand(agitator));
+    new AgitateCommand(agitator).schedule();
+    // bButton.whileTrue(new ReverseAgitateCommand(agitator));
   }
 
   /**
