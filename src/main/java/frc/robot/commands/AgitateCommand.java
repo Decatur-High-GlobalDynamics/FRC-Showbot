@@ -17,13 +17,25 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class AgitateCommand extends CommandBase {
     
     private TeamTalonFX agitator;
+
+    public int agitatorDirection = 1;
     
     public AgitateCommand(TeamTalonFX agtr) {
         agitator = agtr;
+
+        agitator.resetEncoder();
     }
 
     public void execute() {
-        agitator.set(Constants.AGITATOR_SPEED, "A button down.");
+        if (agitator.getCurrentEncoderValue() > 128) {
+            agitatorDirection = -1;
+        }
+        else if (agitator.getCurrentEncoderValue() < -128) {
+            agitatorDirection = 1;
+        }
+
+        agitator.set(Constants.AGITATOR_SPEED * agitatorDirection, "A button down.");
+
         SmartDashboard.putBoolean("A Button", true);
     }
 
