@@ -14,7 +14,8 @@ package frc.robot;
  */
 public final class Constants {
 
-    public static final double AGITATOR_SPEED = 0.375;
+    public static final double AGITATOR_SPEED = 0.3;
+    public static final int AGITATOR_REVERSE_TIME = 2;
 
     public static double fastSpeed = 0.8, slowSpeed = 0.7;
 

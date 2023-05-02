@@ -55,10 +55,15 @@ public class RobotContainer {
 
   public static GenericEntry fastSpeedEntry, slowSpeedEntry;
 
+  public static AgitateCommand agitateCommand;
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     shooter = new ShooterSubsystem();
     driveTrain = new DrivetrainSubsystem();
+    
+    agitator = new TeamTalonFX("agitator", Ports.AGITATOR);
+    agitateCommand = new AgitateCommand(RobotContainer.agitator);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -70,8 +75,12 @@ public class RobotContainer {
     tab.addBoolean("Shooting", () -> primaryTrigger.getAsBoolean() && (Robot.isTestMode || triggerButton.getAsBoolean()));
     tab.addDouble("Agitating", () -> aButton.getAsBoolean() ? 1 : bButton.getAsBoolean() ? -1 : 0 );
 
-    fastSpeedEntry = tab.add("Fast Speed", Constants.fastSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1)).getEntry();
-    slowSpeedEntry = tab.add("Fast Speed", Constants.fastSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1)).getEntry();
+    fastSpeedEntry = tab.add("Fast Speed", Constants.fastSpeed)
+      .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1))
+      .getEntry();
+    slowSpeedEntry = tab.add("Slow Speed", Constants.slowSpeed)
+      .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1))
+      .getEntry();
   }
 
   /**
@@ -97,8 +106,7 @@ public class RobotContainer {
 
     driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, () -> primaryJoystick.getY(), () -> primaryJoystick.getThrottle()));
 
-    agitator = new TeamTalonFX("agitator", Ports.AGITATOR);
-    new AgitateCommand(agitator).schedule();
+    primaryTrigger.whileTrue(agitateCommand);
     // bButton.whileTrue(new ReverseAgitateCommand(agitator));
   }
 
