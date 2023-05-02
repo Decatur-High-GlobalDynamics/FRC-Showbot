@@ -1,14 +1,16 @@
 package frc.robot.commands;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShootModeCommand extends CommandBase {
     
     ShooterSubsystem shooter;
-    public double speedMod;
+    public DoubleSupplier speedMod;
 
-    public ShootModeCommand(double newSpeedMod, ShooterSubsystem shooter) {
+    public ShootModeCommand(DoubleSupplier newSpeedMod, ShooterSubsystem shooter) {
         this.shooter = shooter;
         speedMod = newSpeedMod;
 
@@ -16,7 +18,7 @@ public class ShootModeCommand extends CommandBase {
     }
 
     public void initialize() {
-        shooter.speedMod = speedMod;
+        shooter.speedMod = speedMod.getAsDouble();
     }
 
     public boolean isFinished() {

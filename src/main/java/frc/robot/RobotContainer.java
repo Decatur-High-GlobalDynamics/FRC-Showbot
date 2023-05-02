@@ -4,11 +4,14 @@
 
 package frc.robot;
 
+import java.util.Map;
 import java.util.function.BooleanSupplier;
 
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.commands.AgitateCommand;
@@ -50,6 +53,8 @@ public class RobotContainer {
   public static JoystickButton aButton;
   public static JoystickButton bButton;
 
+  public static GenericEntry fastSpeedEntry, slowSpeedEntry;
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     shooter = new ShooterSubsystem();
@@ -64,6 +69,9 @@ public class RobotContainer {
     tab.addDouble("Shooter Speed Modifier", ()->(shooter.speedMod));
     tab.addBoolean("Shooting", () -> primaryTrigger.getAsBoolean() && (Robot.isTestMode || triggerButton.getAsBoolean()));
     tab.addDouble("Agitating", () -> aButton.getAsBoolean() ? 1 : bButton.getAsBoolean() ? -1 : 0 );
+
+    fastSpeedEntry = tab.add("Fast Speed", Constants.fastSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1)).getEntry();
+    slowSpeedEntry = tab.add("Fast Speed", Constants.fastSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1)).getEntry();
   }
 
   /**
@@ -84,8 +92,8 @@ public class RobotContainer {
 
     primaryTrigger.whileTrue(new ShootCommand(triggerButton, shooter));
 
-    primaryTriggerTwo.onTrue(new ShootModeCommand(1, shooter))
-      .onFalse(new ShootModeCommand(0.5, shooter));
+    primaryTriggerTwo.onTrue(new ShootModeCommand(()->fastSpeedEntry.getDouble(Constants.fastSpeed), shooter))
+      .onFalse(new ShootModeCommand(()->slowSpeedEntry.getDouble(Constants.slowSpeed), shooter));
 
     driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, () -> primaryJoystick.getY(), () -> primaryJoystick.getThrottle()));
 
