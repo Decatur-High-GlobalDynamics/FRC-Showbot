@@ -18,7 +18,7 @@ public class ShootModeCommand extends CommandBase {
     }
 
     public void initialize() {
-        shooter.speedMod = speedMod.getAsDouble();
+        shooter.speedMod = speedMod;
     }
 
     public boolean isFinished() {

@@ -71,7 +71,7 @@ public class RobotContainer {
     tab.addBoolean("Safe Mode", ()->!Robot.isTestMode);
     tab.addBoolean("Primary Trigger", ()->primaryTrigger.getAsBoolean());
     tab.addBoolean("Secondary Button", ()->triggerButton.getAsBoolean());
-    tab.addDouble("Shooter Speed Modifier", ()->(shooter.speedMod));
+    tab.addDouble("Shooter Speed Modifier", ()->(shooter.speedMod.getAsDouble()));
     tab.addBoolean("Shooting", () -> primaryTrigger.getAsBoolean() && (Robot.isTestMode || triggerButton.getAsBoolean()));
     tab.addDouble("Agitating", () -> aButton.getAsBoolean() ? 1 : bButton.getAsBoolean() ? -1 : 0 );
 

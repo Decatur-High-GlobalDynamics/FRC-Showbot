@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.PidParameters;
@@ -13,7 +15,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     private static double voltage = 12;
 
-    public double speedMod = 0.5;
+    public DoubleSupplier speedMod = () -> 0.5;
 
     private PidParameters pidParameters;
     private static double kP = .0005,
@@ -47,7 +49,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void set(float power, String reason) {
         //leftMotor.setSmartMotionVelocity(powerToRPM(power), reason);
-        leftMotor.set(power * speedMod, reason);
+        leftMotor.set(power * speedMod.getAsDouble(), reason);
         //leftMotor.configureWithPidParameters(pidParameters, 0);
         //rightMotor.configureWithPidParameters(pidParameters, 0);
     }
