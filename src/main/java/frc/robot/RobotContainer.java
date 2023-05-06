@@ -53,7 +53,7 @@ public class RobotContainer {
   public static JoystickButton aButton;
   public static JoystickButton bButton;
 
-  public static GenericEntry fastSpeedEntry, slowSpeedEntry;
+  public static GenericEntry fastSpeedEntry, slowSpeedEntry, driveSpeedEntry;
 
   public static AgitateCommand agitateCommand;
 
@@ -81,6 +81,9 @@ public class RobotContainer {
     slowSpeedEntry = tab.add("Slow Speed", Constants.slowSpeed)
       .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1))
       .getEntry();
+    driveSpeedEntry = tab.add("Drive Speed", Constants.driveSpeed)
+      .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1))
+      .getEntry();
   }
 
   /**
@@ -104,7 +107,7 @@ public class RobotContainer {
     primaryTriggerTwo.onTrue(new ShootModeCommand(()->fastSpeedEntry.getDouble(Constants.fastSpeed), shooter))
       .onFalse(new ShootModeCommand(()->slowSpeedEntry.getDouble(Constants.slowSpeed), shooter));
 
-    driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, () -> primaryJoystick.getY(), () -> primaryJoystick.getThrottle()));
+    driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, (() -> primaryJoystick.getY()), () -> primaryJoystick.getThrottle()));
 
     primaryTrigger.whileTrue(agitateCommand);
     // bButton.whileTrue(new ReverseAgitateCommand(agitator));

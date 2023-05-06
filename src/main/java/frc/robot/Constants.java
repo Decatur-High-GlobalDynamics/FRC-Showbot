@@ -17,6 +17,6 @@ public final class Constants {
     public static final double AGITATOR_SPEED = 0.3;
     public static final int AGITATOR_REVERSE_TIME = 2;
 
-    public static double fastSpeed = 0.8, slowSpeed = 0.7;
+    public static double fastSpeed = 0.8, slowSpeed = 0.7, driveSpeed = 0.5;
 
 }
