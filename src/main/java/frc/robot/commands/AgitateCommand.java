@@ -1,34 +1,19 @@
 package frc.robot.commands;
-
 import java.time.LocalDateTime;
-import java.util.function.BooleanSupplier;
-import java.util.function.DoubleSupplier;
-
-import edu.wpi.first.util.sendable.Sendable;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.TeamTalonFX;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.AgitatorSubsystem;
 
 public class AgitateCommand extends CommandBase {
     
-    private TeamTalonFX agitator;
+    private AgitatorSubsystem agitator;
 
     public int agitatorDirection = 1;
     public LocalDateTime lastSwapTime;
-
-    public boolean shouldEnd = false;
     
-    public AgitateCommand(TeamTalonFX agtr) {
-        agitator = agtr;
-
-        agitator.resetEncoder();
+    public AgitateCommand(AgitatorSubsystem agitator) {
+        this.agitator = agitator;
         
         RobotContainer.tab.addDouble("Agitator Direction", ()->agitatorDirection);
 
@@ -43,14 +28,10 @@ public class AgitateCommand extends CommandBase {
             lastSwapTime = LocalDateTime.now();
         }
 
-        agitator.set(Constants.AGITATOR_SPEED * agitatorDirection, "A button down.");
-    }
-
-    public boolean isFinished() {
-        return shouldEnd;
+        agitator.setMotorPower(Constants.AGITATOR_SPEED * agitatorDirection, "A button down.");
     }
 
     public void end(boolean interrupted) {
-        agitator.set(0, "stopped shooting");
+        agitator.setMotorPower(0, "stopped shooting");
     }
 }
