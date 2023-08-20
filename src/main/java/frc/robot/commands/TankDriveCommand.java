@@ -18,6 +18,7 @@ public class TankDriveCommand extends CommandBase {
     this.driveTrain = driveTrain;
     this.rightStick = rightStick;
     this.leftStick = leftStick;
+    
     addRequirements(driveTrain);
   }
 

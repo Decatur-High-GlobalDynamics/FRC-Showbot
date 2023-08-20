@@ -23,6 +23,4 @@ public final class Constants {
 
     public static final double SHOOTER_SPEED = 1;
 
-    public static double shooterFastSpeed = 0.8, shooterSlowSpeed = 0.5, driveSpeed = 0.5;
-
 }

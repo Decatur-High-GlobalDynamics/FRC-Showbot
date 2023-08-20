@@ -20,6 +20,8 @@ public class AgitateCommand extends CommandBase {
         lastSwapTime = LocalDateTime.now();
         RobotContainer.tab.addString("Agitator Swap Time", 
             ()-> lastSwapTime.getHour() + ":" + lastSwapTime.getMinute() + ":" + lastSwapTime.getSecond());
+
+        addRequirements(agitator);
     }
 
     public void execute() {
@@ -28,7 +30,7 @@ public class AgitateCommand extends CommandBase {
             lastSwapTime = LocalDateTime.now();
         }
 
-        agitator.setMotorPower(Constants.AGITATOR_SPEED * agitatorDirection, "A button down.");
+        agitator.setMotorPower(agitatorDirection, "A button down.");
     }
 
     public void end(boolean interrupted) {

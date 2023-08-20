@@ -69,7 +69,7 @@ public class DrivetrainSubsystem extends SubsystemBase
 
     public void setMotorPowers(double leftPowerDesired, double rightPowerDesired, String reason) 
     {
-        speedMod = RobotContainer.driveSpeedEntry.getDouble(Constants.driveSpeed);
+        speedMod = RobotContainer.driveSpeedEntry.getDouble(RobotContainer.driveSpeed);
 
         if (Robot.isTestMode)
         {

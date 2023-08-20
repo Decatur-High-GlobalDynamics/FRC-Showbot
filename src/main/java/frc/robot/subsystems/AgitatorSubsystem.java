@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Ports;
 import frc.robot.TeamTalonFX;
 
@@ -13,7 +14,7 @@ public class AgitatorSubsystem extends SubsystemBase {
     }
 
     public void setMotorPower(double power, String reason) {
-        agitator.set(power, reason);
+        agitator.set(power * Constants.AGITATOR_SPEED, reason);
     }
     
 }

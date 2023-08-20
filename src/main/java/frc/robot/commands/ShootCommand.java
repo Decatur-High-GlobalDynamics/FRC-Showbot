@@ -12,6 +12,8 @@ public class ShootCommand extends CommandBase {
     public ShootCommand(JoystickButton safetyButton, ShooterSubsystem shooter) {
         this.safetyButton = safetyButton;
         this.shooter = shooter;
+
+        addRequirements(shooter);
     }
 
     public void execute() {

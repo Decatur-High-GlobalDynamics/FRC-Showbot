@@ -49,9 +49,8 @@ public class RobotContainer {
     public static JoystickButton primaryAButton, primaryBButton;
     public static JoystickButton safetyButton;
 
+    public static double shooterFastSpeed = 0.8, shooterSlowSpeed = 0.5, driveSpeed = 0.5;
     public static GenericEntry fastSpeedEntry, slowSpeedEntry, driveSpeedEntry;
-
-    public static AgitateCommand agitateCommand;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -71,13 +70,13 @@ public class RobotContainer {
         tab.addBoolean("Shooting", () -> primaryTriggerRight.getAsBoolean() && (Robot.isTestMode || safetyButton.getAsBoolean()));
         tab.addDouble("Agitating", () -> primaryAButton.getAsBoolean() ? 1 : primaryBButton.getAsBoolean() ? -1 : 0 );
 
-        fastSpeedEntry = tab.add("Fast Speed", Constants.shooterFastSpeed)
+        fastSpeedEntry = tab.add("Fast Speed", shooterFastSpeed)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1))
             .getEntry();
-        slowSpeedEntry = tab.add("Slow Speed", Constants.shooterSlowSpeed)
+        slowSpeedEntry = tab.add("Slow Speed", shooterSlowSpeed)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1))
             .getEntry();
-        driveSpeedEntry = tab.add("Drive Speed", Constants.driveSpeed)
+        driveSpeedEntry = tab.add("Drive Speed", driveSpeed)
             .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1))
             .getEntry();
     }
@@ -99,8 +98,8 @@ public class RobotContainer {
         primaryTriggerRight.whileTrue(new ShootCommand(safetyButton, shooter))
             .whileTrue(new AgitateCommand(agitator));
 
-        primaryTriggerLeft.onTrue(new ShootModeCommand(()->fastSpeedEntry.getDouble(Constants.shooterFastSpeed), shooter))
-            .onFalse(new ShootModeCommand(()->slowSpeedEntry.getDouble(Constants.shooterSlowSpeed), shooter));
+        primaryTriggerLeft.onTrue(new ShootModeCommand(()->fastSpeedEntry.getDouble(shooterFastSpeed), shooter))
+            .onFalse(new ShootModeCommand(()->slowSpeedEntry.getDouble(shooterSlowSpeed), shooter));
 
         driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, (() -> primaryJoystick.getY()), () -> primaryJoystick.getThrottle()));
     }
