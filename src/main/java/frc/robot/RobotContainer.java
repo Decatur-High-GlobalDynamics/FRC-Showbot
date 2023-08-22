@@ -66,13 +66,16 @@ public class RobotContainer {
         tab.addDouble("Agitating", () -> primaryAButton.getAsBoolean() ? 1 : primaryBButton.getAsBoolean() ? -1 : 0 );
 
         fastSpeedEntry = tab.add("Fast Speed", shooterFastSpeed)
-            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1))
+            .withWidget(BuiltInWidgets.kNumberSlider)
+            .withProperties(Map.of("min", 0, "max", 1))
             .getEntry();
         slowSpeedEntry = tab.add("Slow Speed", shooterSlowSpeed)
-            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", -1, "max", 1))
+            .withWidget(BuiltInWidgets.kNumberSlider)
+            .withProperties(Map.of("min", 0, "max", 1))
             .getEntry();
         driveSpeedEntry = tab.add("Drive Speed", driveSpeed)
-            .withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1))
+            .withWidget(BuiltInWidgets.kNumberSlider)
+            .withProperties(Map.of("min", 0, "max", 1))
             .getEntry();
     }
 
