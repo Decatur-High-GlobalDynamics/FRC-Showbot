@@ -21,8 +21,4 @@ public class ShootModeCommand extends CommandBase {
         shooter.speedMod = speedMod;
     }
 
-    public boolean isFinished() {
-        return true;
-    }
-
 }
