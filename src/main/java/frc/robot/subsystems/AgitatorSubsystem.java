@@ -15,6 +15,7 @@ public class AgitatorSubsystem extends SubsystemBase {
 
     public void setMotorPower(double power, String reason) {
         agitator.set(power * Constants.AGITATOR_SPEED, reason);
+        // System.out.println("Agitator ran. Reason: " + reason + " | Power: " + power);
     }
     
 }

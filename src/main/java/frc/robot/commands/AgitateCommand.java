@@ -28,6 +28,8 @@ public class AgitateCommand extends CommandBase {
         if(LocalDateTime.now().compareTo(lastSwapTime.plusSeconds(Constants.AGITATOR_REVERSE_TIME)) == 1) {
             agitatorDirection *= -1;
             lastSwapTime = LocalDateTime.now();
+
+            System.out.println("Switching agitator direction...");
         }
 
         agitator.setMotorPower(agitatorDirection, "A button down.");
