@@ -5,6 +5,8 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.AgitatorSubsystem;
 
+
+//Constructor
 public class AgitateCommand extends CommandBase {
     
     private AgitatorSubsystem agitator;

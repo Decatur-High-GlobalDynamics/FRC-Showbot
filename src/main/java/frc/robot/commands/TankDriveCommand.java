@@ -14,6 +14,7 @@ public class TankDriveCommand extends CommandBase {
   DoubleSupplier rightStick;
   DoubleSupplier leftStick;
 
+  //Constructer
   public TankDriveCommand(DrivetrainSubsystem driveTrain, DoubleSupplier leftStick, DoubleSupplier rightStick) {
     this.driveTrain = driveTrain;
     this.rightStick = rightStick;

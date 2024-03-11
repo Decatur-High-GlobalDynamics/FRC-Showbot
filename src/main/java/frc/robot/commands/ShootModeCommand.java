@@ -10,6 +10,7 @@ public class ShootModeCommand extends CommandBase {
     ShooterSubsystem shooter;
     public DoubleSupplier speedMod;
 
+    //Comstructor
     public ShootModeCommand(DoubleSupplier newSpeedMod, ShooterSubsystem shooter) {
         this.shooter = shooter;
         speedMod = newSpeedMod;

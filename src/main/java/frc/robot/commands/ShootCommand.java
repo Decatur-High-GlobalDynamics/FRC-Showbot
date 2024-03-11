@@ -8,7 +8,8 @@ public class ShootCommand extends CommandBase {
     
     private ShooterSubsystem shooter;
     private JoystickButton safetyButton;
-    
+
+    //Cunstructor
     public ShootCommand(JoystickButton safetyButton, ShooterSubsystem shooter) {
         this.safetyButton = safetyButton;
         this.shooter = shooter;
