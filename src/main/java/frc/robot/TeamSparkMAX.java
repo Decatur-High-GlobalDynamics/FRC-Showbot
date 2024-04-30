@@ -29,7 +29,6 @@ public class TeamSparkMAX extends CANSparkMax {
 
   private CANSparkMax.ControlType ctrlType = null;
 
-  //Contructor
   public TeamSparkMAX(String smartDashboardPrefix, int deviceID) {
     super(deviceID, MotorType.kBrushless); // Neos are brushless
     this.smartDashboardPrefix = smartDashboardPrefix;

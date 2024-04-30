@@ -48,7 +48,6 @@ public class RobotContainer {
     public static GenericEntry fastSpeedEntry, slowSpeedEntry, driveSpeedEntry;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
-    //Constrictor
     public RobotContainer() {
         shooter = new ShooterSubsystem();
         driveTrain = new DrivetrainSubsystem();

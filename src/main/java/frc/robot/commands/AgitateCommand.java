@@ -1,13 +1,11 @@
 package frc.robot.commands;
 import java.time.LocalDateTime;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.AgitatorSubsystem;
 
-
-//Constructor
-public class AgitateCommand extends CommandBase {
+public class AgitateCommand extends Command {
     
     private AgitatorSubsystem agitator;
 
@@ -30,8 +28,6 @@ public class AgitateCommand extends CommandBase {
         if(LocalDateTime.now().compareTo(lastSwapTime.plusSeconds(Constants.AGITATOR_REVERSE_TIME)) == 1) {
             agitatorDirection *= -1;
             lastSwapTime = LocalDateTime.now();
-
-            System.out.println("Switching agitator direction...");
         }
 
         agitator.setMotorPower(agitatorDirection, "A button down.");

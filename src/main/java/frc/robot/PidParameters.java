@@ -11,7 +11,6 @@ public class PidParameters {
   public double kP, kI, kD, kF, kIZone, kPeakOutput, maxAcc, maxVel;
   public int errorTolerance;
 
-  //Constructir
   public PidParameters( // Talon SRX
       double kP,
       double kI,

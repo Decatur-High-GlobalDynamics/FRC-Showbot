@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Ports;                                                                                                                                                                                                                                                                                                      
+import frc.robot.Ports;
 import frc.robot.TeamSparkMAX;
 
 public class ShooterSubsystem extends SubsystemBase {

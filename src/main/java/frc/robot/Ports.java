@@ -1,7 +1,5 @@
 package frc.robot;
 
-//This class contains the ports for the robot, and should not be used for anything else
-
 public class Ports {
     public static int SHOOTER_MOTOR_LEFT = 17;
     public static int SHOOTER_MOTOR_RIGHT = 1;

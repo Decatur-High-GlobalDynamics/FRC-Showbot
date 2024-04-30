@@ -4,17 +4,16 @@
 
 package frc.robot.commands;
 import java.util.function.DoubleSupplier;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 /** An example command that uses an example subsystem. */
-public class TankDriveCommand extends CommandBase {
+public class TankDriveCommand extends Command {
   DrivetrainSubsystem driveTrain;
   DoubleSupplier rightStick;
   DoubleSupplier leftStick;
 
-  //Constructer
   public TankDriveCommand(DrivetrainSubsystem driveTrain, DoubleSupplier leftStick, DoubleSupplier rightStick) {
     this.driveTrain = driveTrain;
     this.rightStick = rightStick;
