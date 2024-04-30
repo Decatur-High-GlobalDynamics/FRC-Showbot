@@ -11,11 +11,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import frc.robot.commands.AgitateCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.ShootModeCommand;
 import frc.robot.commands.TankDriveCommand;
-import frc.robot.subsystems.AgitatorSubsystem;
+import frc.robot.subsystems.SpindexerSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -37,7 +36,7 @@ public class RobotContainer {
 
     public static DrivetrainSubsystem driveTrain;
 
-    public static AgitatorSubsystem agitator;
+    public static SpindexerSubsystem spindexer;
 
     public static Joystick primaryJoystick, secondaryJoystick;
     public static JoystickButton primaryTriggerRight, primaryTriggerLeft;
@@ -52,7 +51,7 @@ public class RobotContainer {
         shooter = new ShooterSubsystem();
         driveTrain = new DrivetrainSubsystem();
         
-        agitator = new AgitatorSubsystem();
+        spindexer = new SpindexerSubsystem();
 
         // Configure the button bindings
         configurePrimaryButtonBindings();
@@ -92,9 +91,6 @@ public class RobotContainer {
         primaryTriggerLeft = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerLeft);
         primaryAButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.a);
         primaryBButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.b);
-
-        primaryTriggerRight.whileTrue(new ShootCommand(safetyButton, shooter))
-            .whileTrue(new AgitateCommand(agitator));
 
         primaryTriggerLeft.onTrue(new ShootModeCommand(()->fastSpeedEntry.getDouble(shooterFastSpeed), shooter))
             .onFalse(new ShootModeCommand(()->slowSpeedEntry.getDouble(shooterSlowSpeed), shooter));
