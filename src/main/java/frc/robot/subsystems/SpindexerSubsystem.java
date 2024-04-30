@@ -5,16 +5,16 @@ import frc.robot.Constants;
 import frc.robot.Ports;
 import frc.robot.TeamTalonFX;
 
-public class AgitatorSubsystem extends SubsystemBase {
+public class SpindexerSubsystem extends SubsystemBase {
     
     public TeamTalonFX agitator;
 
-    public AgitatorSubsystem() {
+    public SpindexerSubsystem() {
         agitator = new TeamTalonFX("Agitator", Ports.AGITATOR);
     }
 
-    public void setMotorPower(double power, String reason) {
-        agitator.set(power * Constants.AGITATOR_SPEED, reason);
+    public void setMotorPower(double power) {
+        agitator.set(power * Constants.SPINDEXER_SPEED);
     }
     
 }
