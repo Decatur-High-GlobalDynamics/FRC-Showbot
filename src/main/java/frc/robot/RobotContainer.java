@@ -94,10 +94,10 @@ public class RobotContainer {
         primaryBButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.b);
 
         primaryTriggerLeft.onTrue(new ShootModeCommand(()->fastSpeedEntry.getDouble(shooterFastSpeed), shooter))
-            .onFalse(new ShootModeCommand(()->slowSpeedEntry.getDouble(shooterSlowSpeed), shooter));
+                .onFalse(new ShootModeCommand(()->slowSpeedEntry.getDouble(shooterSlowSpeed), shooter));
 
-        primaryTriggerRight.onTrue(new SpindexerCommand(spindexer, 0));
-        primaryTriggerRight.onTrue(new SpindexerCommand(spindexer, 1));
+        primaryTriggerLeft.onTrue(new SpindexerCommand(spindexer, 1))
+                .onFalse(new SpindexerCommand(spindexer, 0));
 
         driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, (() -> primaryJoystick.getY()), () -> primaryJoystick.getThrottle()));
     }
