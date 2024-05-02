@@ -11,6 +11,8 @@ public class SpindexerSubsystem extends SubsystemBase {
 
     public SpindexerSubsystem() {
         agitator = new TeamTalonFX("Agitator", Ports.AGITATOR);
+
+        agitator.set(Constants.SPINDEXER_SPEED);
     }
 
     public void setMotorPower(double power) {

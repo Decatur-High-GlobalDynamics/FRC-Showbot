@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.ShootModeCommand;
+import frc.robot.commands.SpindexerCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.SpindexerSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -94,6 +95,9 @@ public class RobotContainer {
 
         primaryTriggerLeft.onTrue(new ShootModeCommand(()->fastSpeedEntry.getDouble(shooterFastSpeed), shooter))
             .onFalse(new ShootModeCommand(()->slowSpeedEntry.getDouble(shooterSlowSpeed), shooter));
+
+        primaryTriggerRight.onTrue(new SpindexerCommand(spindexer, 0));
+        primaryTriggerRight.onTrue(new SpindexerCommand(spindexer, 1));
 
         driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, (() -> primaryJoystick.getY()), () -> primaryJoystick.getThrottle()));
     }
