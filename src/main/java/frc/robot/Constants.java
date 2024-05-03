@@ -18,7 +18,7 @@ public final class Constants {
 
     public static final double DRIVETRAIN_MAX_POWER_CHANGE = 0.1;
 
-    public static final double SPINDEXER_SPEED = 0.75;
+    public static final double SPINDEXER_SPEED = 0.15;
     public static final int AGITATOR_REVERSE_TIME = 2;
 
     public static final double SHOOTER_SPEED = 1;
