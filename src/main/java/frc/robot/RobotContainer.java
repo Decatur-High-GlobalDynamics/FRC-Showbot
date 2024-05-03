@@ -86,6 +86,11 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configurePrimaryButtonBindings() {
+        secondaryJoystick = new Joystick(1);
+
+        //This is the big red button
+        safetyButton = new JoystickButton(secondaryJoystick, LogitechControllerButtons.x);
+        
         primaryJoystick = new Joystick(0);
 
         primaryTriggerRight = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
@@ -96,17 +101,16 @@ public class RobotContainer {
         primaryTriggerLeft.onTrue(new ShootModeCommand(()->fastSpeedEntry.getDouble(shooterFastSpeed), shooter))
                 .onFalse(new ShootModeCommand(()->slowSpeedEntry.getDouble(shooterSlowSpeed), shooter));
 
-        primaryTriggerLeft.onTrue(new SpindexerCommand(spindexer, 1))
+        primaryTriggerRight.onTrue(new SpindexerCommand(spindexer, 1))
                 .onFalse(new SpindexerCommand(spindexer, 0));
+        primaryTriggerRight.whileTrue(new ShootCommand(safetyButton, shooter));
+        
 
         driveTrain.setDefaultCommand(new TankDriveCommand(driveTrain, (() -> primaryJoystick.getY()), () -> primaryJoystick.getThrottle()));
     }
 
     private void configureSecondaryButtonBindings() {
-        secondaryJoystick = new Joystick(1);
-
-        //This is the big red button
-        safetyButton = new JoystickButton(secondaryJoystick, LogitechControllerButtons.x);
+        
     }
 
     /**
