@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.commands.ShootCommand;
-import frc.robot.commands.ShootModeCommand;
 import frc.robot.commands.SpindexerCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.SpindexerSubsystem;
@@ -61,18 +60,9 @@ public class RobotContainer {
         tab.addBoolean("Safe Mode", ()->!Robot.isTestMode);
         tab.addBoolean("Primary Trigger", ()->primaryTriggerRight.getAsBoolean());
         tab.addBoolean("Secondary Button", ()->safetyButton.getAsBoolean());
-        tab.addDouble("Shooter Speed Modifier", ()->(shooter.speedMod.getAsDouble()));
         tab.addBoolean("Shooting", () -> primaryTriggerRight.getAsBoolean() && (Robot.isTestMode || safetyButton.getAsBoolean()));
         tab.addDouble("Agitating", () -> primaryAButton.getAsBoolean() ? 1 : primaryBButton.getAsBoolean() ? -1 : 0 );
 
-        fastSpeedEntry = tab.add("Fast Speed", shooterFastSpeed)
-            .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 1))
-            .getEntry();
-        slowSpeedEntry = tab.add("Slow Speed", shooterSlowSpeed)
-            .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 1))
-            .getEntry();
         driveSpeedEntry = tab.add("Drive Speed", driveSpeed)
             .withWidget(BuiltInWidgets.kNumberSlider)
             .withProperties(Map.of("min", 0, "max", 1))
@@ -94,12 +84,8 @@ public class RobotContainer {
         primaryJoystick = new Joystick(0);
 
         primaryTriggerRight = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerRight);
-        primaryTriggerLeft = new JoystickButton(primaryJoystick, LogitechControllerButtons.triggerLeft);
         primaryAButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.a);
         primaryBButton = new JoystickButton(primaryJoystick, LogitechControllerButtons.b);
-
-        primaryTriggerLeft.onTrue(new ShootModeCommand(()->fastSpeedEntry.getDouble(shooterFastSpeed), shooter))
-                .onFalse(new ShootModeCommand(()->slowSpeedEntry.getDouble(shooterSlowSpeed), shooter));
 
         primaryTriggerRight.onTrue(new SpindexerCommand(spindexer, 1))
                 .onFalse(new SpindexerCommand(spindexer, 0));
