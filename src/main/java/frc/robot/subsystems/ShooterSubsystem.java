@@ -18,8 +18,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public static ShuffleboardTab tab = Shuffleboard.getTab("Main");
 
-    private DoubleSupplier speedMod;
-
     private GenericEntry speedEntry;
 
     public ShooterSubsystem() {
@@ -36,8 +34,6 @@ public class ShooterSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kNumberSlider)
             .withProperties(Map.of("min", 0, "max", 1))
             .getEntry();
-
-        tab.addDouble("Shooter Speed Modifier", ()->(speedMod.getAsDouble()));
     }
 
     public void setMotorPower(float power, String reason) {
